@@ -19,7 +19,6 @@ def authentication_failed(response):
 
 class ModisSpider(scrapy.Spider):
     name = 'modis'
-    # start_urls = [f'https://tjg.hywly.com/a/1/24885/{i}.jpg' for i in range(0,93)]
     down_urls = down_urls
     login_url  = 'https://urs.earthdata.nasa.gov/'
     custom_settings = {'DEFAULT_REQUEST_HEADERS':
@@ -31,7 +30,7 @@ class ModisSpider(scrapy.Spider):
         else:
             self.cookie_list = ie_cookies_to_cookies(ie_cookies_path)
             #breakpoint()
-            for i in self.start_requests_():  # 不能用return self.start_requests_()
+            for i in self.start_requests_():  # 不能用return self.start_requests_(),否则为空，原因未知。
                 yield i 
     
     def before_login(self,response):
